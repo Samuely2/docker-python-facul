@@ -39,7 +39,7 @@ def store():
         )
     ) 
 
-def delete(user_id):
+def delete_user_by_id(user_id):
     success = User.delete_user(user_id)
     if success:
         return make_response(
@@ -53,7 +53,7 @@ def delete(user_id):
         ), 404
     )
 
-def update(user_id):
+def update_user_by_id(user_id):
     data = request.get_json()
     updated_user = User.update_user(user_id, data)
 
