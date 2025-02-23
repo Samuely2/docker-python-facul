@@ -24,7 +24,22 @@ class User:
             "name": data["name"],
             "email": data["email"]
         }
-
-        cls.users.append(new_user)
-        
+        cls.users.append(new_user)        
         return cls.users
+    
+    @classmethod
+    def delete_user(cls, user_id):
+        for user in cls.users:
+            if user["id"] == user_id:
+                cls.users.remove(user) 
+                return True
+        return False 
+    
+    @classmethod
+    def update_user(cls, user_id, data):
+        for user in cls.users:
+            if user["id"] == user_id:
+                user["name"] = data.get("name", user["name"])
+                user["email"] = data.get("email", user["email"])
+                return user  
+        return None

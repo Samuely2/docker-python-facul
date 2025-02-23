@@ -16,7 +16,7 @@ def get_user_by_id(user_id):
             mensagem = "Listagem de user",
             usuarios = User.get_user_by_id(user_id)
         )
-    ) 
+    )
 
 def store():
     data = request.get_json()
@@ -38,3 +38,35 @@ def store():
             usuarios = User.store(data)
         )
     ) 
+
+def delete(user_id):
+    success = User.delete_user(user_id)
+    if success:
+        return make_response(
+            jsonify(
+                mensagem="Usuário excluído com sucesso"
+            )
+        )
+    return make_response(
+        jsonify(
+            mensagem="Usuário não encontrado"
+        ), 404
+    )
+
+def update(user_id):
+    data = request.get_json()
+    updated_user = User.update_user(user_id, data)
+
+    if updated_user:
+        return make_response(
+            jsonify(
+                mensagem="Usuário atualizado com sucesso",
+                usuario=updated_user
+            )
+        )
+    
+    return make_response(
+        jsonify(
+            mensagem="Usuário não encontrado"
+        ), 404
+    )
